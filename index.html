@@ -1,0 +1,2911 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+  
+  
+<style>
+
+@font-face {
+  font-family: 'SFUIDisplay-Light', monospace;
+  src: url("C:\Users\siddh\OneDrive\Documents\HomeOS\fonts\SFUIDisplay\SFUIDisplay-Light.ttf") 
+}
+
+.album-photos:after, .window-actions:after, .menu-bar nav:after {
+  clear: both;
+  content: "";
+  display: table;
+}
+
+.vh {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+.focusable.vh:active, .focusable.vh:focus {
+  clip: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+  width: auto;
+}
+
+html {
+  height: 100%;
+  font-family: 'SFUIDisplay-Light', monospace;
+}
+
+*, *:before, *:after {
+  box-sizing: border-box;
+  cursor: default;
+}
+
+body {
+  background: url("background.jpg") 50% 0;
+  background-size: cover;
+  font-family: 'SFUIDisplay-Light', monospace;
+  font-weight: 400;
+  height: 100%;
+  margin: 0;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  overflow: hidden;
+}
+
+img {
+  max-width: 100%;
+}
+
+.screen {
+  top: 22px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: absolute;
+  z-index: 0;
+}
+
+a {
+  cursor: default;
+  text-decoration: none;
+}
+
+ol,
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+p {
+  margin: 0;
+}
+
+strong {
+  font-weight: 700;
+}
+
+.text-field {
+  background-color: #fcfcfc;
+  border: 1px solid #DBDBDB;
+  border-radius: 4px;
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 400;
+  height: 22px;
+  outline: none;
+  padding: 0 10px 0 40%;
+  position: relative;
+  transition: 0.2s padding;
+  vertical-align: top;
+  width: 100%;
+  z-index: 1;
+}
+.current-window .text-field {
+  border-color: transparent;
+  box-shadow: 0 1px 0 0 #c5c3c5;
+}
+.text-field:focus {
+  padding-left: 25px;
+  box-shadow: 0 0 0 0 transparent;
+  cursor: text;
+}
+.text-field:focus ~ .outline {
+  opacity: 1;
+  transform: scale(1);
+}
+.text-field:valid {
+  padding-left: 25px;
+}
+
+.search {
+  position: relative;
+}
+.search .outline {
+  border-radius: 4px;
+  box-shadow: 0 0 0 4px #94bfee;
+  height: 22px;
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  transform: scale(1.2);
+  transition: 0.15s;
+  width: 100%;
+  z-index: 0;
+}
+
+.icon {
+  display: inline-block;
+  height: 1em;
+  vertical-align: middle;
+  width: 1em;
+}
+.menu-bar .icon {
+  color: inherit;
+  line-height: 22px;
+  margin-top: -2px;
+  fill: #fff;
+}
+
+.icon-button-back {
+  width: 0.5830078125em;
+}
+
+.icon-button-forward {
+  width: 0.5830078125em;
+}
+
+.icon-darr {
+  width: 1.7998046875em;
+}
+
+.icon-notification-center {
+  font-size: 10px;
+  width: 1.7998046875em;
+}
+
+.icon-sort-by {
+  width: 1.1669921875em;
+}
+
+.icon-spotlight {
+  width: 1.037109375em;
+}
+.menu-bar .icon-spotlight {
+  font-size: 14px;
+
+}
+
+.icon-view-as-columns {
+  width: 1.599609375em;
+}
+
+.icon-view-as-coverflow {
+  width: 1.400390625em;
+}
+
+.icon-view-as-list {
+  width: 1.400390625em;
+}
+
+.icon-wifi {
+  width: 1.400390625em;
+}
+
+.btn {
+  background-color: #fcfcfc;
+  border: 1px solid #DBDBDB;
+  border-radius: 4px;
+  display: inline-block;
+  height: 22px;
+  outline: none;
+  vertical-align: top;
+  padding: 0 10px;
+}
+.btn .icon {
+  font-size: 10px;
+  margin: 0 auto;
+  display: block;
+  fill: #A4A4A4;
+}
+.current-window .btn .icon {
+  fill: #737373;
+}
+.btn:active {
+  background-color: #E4E4E4;
+  box-shadow: 0 0 0 0 transparent, inset 0 1px 0 0 #F1F1F1;
+}
+.current-window .btn {
+  border-color: transparent;
+  box-shadow: 0 1px 0 0 #c5c3c5, inset 0 1px 0 0 #fff;
+}
+.current-window .btn:active {
+  background-color: #E4E4E4;
+  box-shadow: 0 1px 0 0 #c5c3c5, inset 0 1px 0 0 #F1F1F1;
+}
+.btn.selected {
+  background-color: #E3E3E3;
+}
+.current-window .btn.selected {
+  background-color: #706F70;
+  box-shadow: 0 1px 0 0 #c5c3c5;
+}
+.current-window .btn.selected:active {
+  background-color: #5A595A;
+}
+.current-window .btn.selected .icon {
+  fill: #fff;
+}
+.btn.btn-back, .btn.btn-forward {
+  padding: 0;
+  width: 26px;
+}
+.btn.btn-back .icon, .btn.btn-forward .icon {
+  font-size: 13px;
+}
+.btn:disabled:active {
+  background-color: #fcfcfc;
+  border-color: #DBDBDB;
+}
+.current-window .btn:disabled:active {
+  border-color: transparent;
+  box-shadow: 0 1px 0 0 #c5c3c5, inset 0 1px 0 0 #fff;
+}
+.current-window .btn:disabled .icon {
+  fill: #D8D8D8;
+}
+
+.group {
+  font-size: 0;
+  white-space: nowrap;
+}
+.group.search {
+  width: 27%;
+}
+
+.btn-group {
+  display: inline;
+  margin-right: 8px;
+  white-space: nowrap;
+}
+.btn-group .btn {
+  margin-right: 8px;
+}
+.btn-group.split .btn {
+  margin-right: 1px;
+}
+.btn-group.tight .btn {
+  border-radius: 0;
+  margin-right: 0;
+  border-left: 1px solid #E2E2E2;
+  border-right: 0;
+}
+.btn-group.tight .btn:last-child {
+  border-right: 1px solid #E2E2E2;
+}
+.btn-group.tight .btn.selected {
+  border-left-color: #DBDBDB;
+  border-right-color: #DBDBDB;
+}
+.current-window .btn-group.tight .btn.selected {
+  border-left-color: #656465;
+  border-right-color: #656465;
+}
+.btn-group.tight .btn:first-child {
+  border-radius: 4px 0 0 4px;
+}
+.btn-group.tight .btn:last-child {
+  border-radius: 0 4px 4px 0;
+}
+
+.sort-controls .btn {
+  width: 28px;
+  padding: 0;
+}
+
+.dock {
+  bottom: 0;
+  display: flex;
+  height: 70px;
+  left: 0;
+  position: fixed;
+  width: 100%;
+  z-index: 99999;
+  justify-content: center;
+  margin:25px;
+  
+  
+}
+.dock:hover .app-title {
+  display: block;
+}
+.dock ul {
+  
+  border-radius: 15px;
+  box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.25);
+  display: flex;
+  height: 100%;
+  width:1500px;
+  list-style: none;
+  margin: 0;
+  padding: 5px;
+  vertical-align: top;
+  white-space: nowrap;
+  background: rgba(125,142,157,0.75);
+  background-color: rgb(102,153,204)(102,153,204,50)
+  
+  
+  
+}
+.dock .app {
+  position: relative;
+  display:flex;
+  align-items: center;
+}
+.dock .app:active .app-icon {
+  opacity: 0.5;
+  
+}
+.dock .app.running:before {
+  background-color: white;
+  border-radius: 4px;
+  bottom: -4px;
+  content: "";
+  height: 4px;
+  left: 50%;
+  margin-left: -2px;
+  position: absolute;
+  width: 4px;
+}
+.dock .app-icon {
+  display: block;
+  height: 63px;
+  width: 63px;
+}
+.dock img {
+  display: block;
+}
+.dock .app-title {
+  background-color: rgba(0, 0, 0, 0.75);
+  border-radius: 5px;
+  bottom: 100%;
+  color: #fff;
+  display: none;
+  font-size: 14px;
+  font-weight: 300;
+  left: 50%;
+  margin-bottom: 22px;
+  opacity: 0;
+  padding: 5px 10px;
+  position: absolute;
+  text-align: center;
+  transform: translate(-50%, 0);
+  white-space: nowrap;
+}
+.dock .app-title:before {
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 8px solid rgba(0, 0, 0, 0.75);
+  content: "";
+  left: 50%;
+  margin-left: -5px;
+  position: absolute;
+  top: 100%;
+}
+.dock .app-title small {
+  opacity: 0.5;
+}
+.dock a {
+  display: inline-block;
+  padding: 0;
+  position: relative;
+  vertical-align: top;
+}
+.dock a:hover .app-title {
+  opacity: 1;
+  transition: 0s opacity;
+}
+.dock .ui-sortable-helper .app-title {
+  display: none;
+}
+.dock .dock-resizer {
+  display: table-cell;
+  height: 40px;
+  vertical-align: middle;
+  width: 10px;
+}
+.dock .ui-resizable-handle {
+  display: block;
+  height: 100%;
+  position: relative;
+  top: 0;
+  width: 10px;
+}
+.dock .ui-resizable-handle:before {
+  background-color: rgba(255, 255, 255, 0.25);
+  content: "";
+  display: block;
+  height: 80%;
+  margin: 0 auto;
+  position: relative;
+  top: 10%;
+  width: 1px;
+}
+
+.menu-bar {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding-left: 15px;
+  padding-right: 10px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  z-index: 1;
+}
+.menu-bar a {
+  color: #fff;
+  display: block;
+  line-height: 22px;
+  text-decoration: none;
+}
+.menu-bar nav {
+  width: 100%;
+}
+
+.menu {
+  font-size: 0;
+}
+.menu li {
+  z-index: 1;
+  position: relative;
+}
+.menu > li {
+  display: inline-block;
+  vertical-align: top;
+}
+.menu a {
+  font-size: 15px;
+  padding: 0 9px;
+}
+.menu a strong {
+  display: block;
+  line-height: 21px;
+}
+.menu .shortcut {
+  float: right;
+}
+.menu.active-nav li:hover > a {
+  background-color: #227DF4;
+}
+.menu.active-nav li:hover > .dropdown {
+  display: block;
+}
+
+.dropdown {
+  background-color: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-radius: 0 0 5px 5px;
+  border-top-width: 0;
+  box-shadow: 0 3px 10px 2px rgba(0, 0, 0, 0.15);
+  display: none;
+  left: 0;
+  padding: 3px 0;
+  position: absolute;
+  top: 100%;
+  width: 290px;
+}
+.dropdown a {
+  display: block;
+  color: #fff;
+  font-size: 14px;
+  line-height: 20px;
+  padding: 0 10px 0 20px;
+  white-space: nowrap;
+}
+.dropdown a:hover {
+  background-color: #227DF4;
+}
+.dropdown .separator {
+  background-color: rgba(255, 255, 255, 0.25);
+  height: 2px;
+  margin: 3px -1px;
+}
+.dropdown .child-nav {
+  border-radius: 5px;
+  border-top-width: 1px;
+  left: 100%;
+  top: -4px;
+}
+.dropdown .has-sub {
+  position: relative;
+}
+.dropdown .has-sub > a {
+  position: relative;
+}
+.dropdown .has-sub > a:before {
+  border-bottom: 5px solid transparent;
+  border-left: 9px solid #fff;
+  border-top: 5px solid transparent;
+  content: "";
+  margin-top: -5px;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  z-index: 0;
+}
+.dropdown .has-sub:hover .dropdown {
+  display: block;
+}
+
+li.system-menu > a {
+  font-size: 18px;
+  padding: 0 8px;
+}
+
+.contextual-menu {
+  float: left;
+}
+
+.extras-menu {
+  float: right;
+}
+.extras-menu .dropdown {
+  left: auto;
+  right: 0;
+  width: auto;
+}
+
+.context-menu {
+  background-color: rgba(240, 240, 240, 0.9);
+  border-radius: 5px;
+  border-width: 0;
+  display: none;
+  width: auto;
+  z-index: 1000;
+}
+.context-menu a {
+  color: #000;
+}
+.context-menu a:hover {
+  background-color: #0260BE;
+  color: #fff;
+}
+.context-menu .child-nav {
+  background-color: rgba(240, 240, 240, 0.9);
+  border-width: 0;
+  top: -3px;
+  width: auto;
+}
+.context-menu .child-nav a {
+  padding-right: 20px;
+}
+.context-menu .has-sub > a:before {
+  border-left-color: #000;
+}
+.context-menu .has-sub:hover > a {
+  background-color: #0260BE;
+  color: #fff;
+}
+.context-menu .separator {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.window {
+  border-radius: 5px;
+  bottom: auto;
+  display: flex;
+  flex-direction: column;
+  height: 400px;
+  position: absolute;
+  transition: 0.2s;
+  transition-property: scale, width, height, left, top, opacity;
+  width: 700px;
+  z-index: 0;
+}
+.window.window-closed {
+  opacity: 0;
+  transform: scale(0.1);
+}
+.window.window-opened {
+  opacity: 1;
+  transform: scale(1);
+}
+.window.current-window {
+  box-shadow: 0 20px 75px 0 rgba(0, 0, 0, 0.5);
+  z-index: 10;
+}
+.window.ui-draggable-dragging, .window.ui-resizable-resizing {
+  transition: 0s;
+}
+.window-header {
+  background: #FBFBFB;
+  border: 1px solid #DBDBDB;
+  border-radius: 5px 5px 0 0;
+  box-sizing: content-box;
+  position: relative;
+}
+.current-window .window-header {
+  background: linear-gradient(to bottom, #E9E7E9 0%, #D8D6D8 100%);
+  border-color: #AFAFAF;
+  box-shadow: inset 0 1px 0 0 #f5f4f5;
+}
+.window-actions {
+  padding: 5px 12px;
+  position: relative;
+}
+.window-actions.combined-actions {
+  display: flex;
+  padding: 13px 12px;
+  transition: 0.2s padding;
+}
+.window-controls {
+  display: flex;
+  position: relative;
+  z-index: 1;
+}
+.window-controls:hover a:before, .window-controls:hover a:after {
+  display: block;
+}
+.window-controls:active a:before, .window-controls:active a:after {
+  display: block;
+}
+.window-controls li {
+  padding-right: 8px;
+}
+.window-controls li:last-child {
+  padding-right: 0;
+}
+.window-controls a {
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  border-radius: 50%;
+  display: block;
+  height: 12px;
+  position: relative;
+  width: 12px;
+}
+.current-window .window-controls a {
+  border-color: rgba(0, 0, 0, 0.2);
+}
+.window-controls a:before, .window-controls a:after {
+  content: "";
+  display: none;
+  position: absolute;
+}
+.window-controls a.window-close {
+  background-color: #DDDDDD;
+  transform: rotate(45deg);
+}
+.current-window .window-controls a.window-close {
+  background-color: #fd5e59;
+}
+.window-controls a.window-close:active {
+  background-color: #BD4945;
+}
+.window-controls a.window-close:before, .window-controls a.window-close:after {
+  background-color: rgba(0, 0, 0, 0.75);
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.window-controls a.window-close:before {
+  height: 8px;
+  width: 1px;
+}
+.window-controls a.window-close:after {
+  height: 1px;
+  width: 8px;
+}
+.window-controls a.window-minimize {
+  background-color: #DDDDDD;
+}
+.current-window .window-controls a.window-minimize {
+  background-color: #ffbb3b;
+}
+.window-controls a.window-minimize:active {
+  background-color: #BE8D2F;
+}
+.window-controls a.window-minimize:before {
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 1px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+}
+.window-controls a.window-zoom {
+  background-color: #DDDDDD;
+  transform: rotate(45deg);
+}
+.current-window .window-controls a.window-zoom {
+  background-color: #34c748;
+}
+.window-controls a.window-zoom:active {
+  background-color: #269636;
+}
+.window-controls a.window-zoom:before, .window-controls a.window-zoom:after {
+  border-left: 3px solid transparent;
+  border-right: 3px solid transparent;
+  left: 2px;
+}
+.window-controls a.window-zoom:before {
+  border-bottom: 3px solid rgba(0, 0, 0, 0.5);
+  top: 1px;
+}
+.window-controls a.window-zoom:after {
+  border-top: 3px solid rgba(0, 0, 0, 0.5);
+  bottom: 1px;
+}
+.window-title {
+  display: block;
+  font-size: 13px;
+  left: 0;
+  line-height: 22px;
+  margin-top: -11px;
+  opacity: 0.75;
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  width: 100%;
+}
+.window .title-icon {
+  display: inline-block;
+  margin-top: 3px;
+  vertical-align: top;
+  width: 14px;
+}
+.window-nav {
+  display: flex;
+  padding: 2px 7px 8px;
+  justify-content: space-between;
+}
+.window-body {
+  overflow: hidden;
+  position: relative;
+  flex: 1;
+}
+.window-wrapper {
+  border-left: 1px solid #DBDBDB;
+  border-right: 1px solid #DBDBDB;
+  bottom: 0;
+  display: flex;
+  flex-direction: row;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 1;
+  flex: 1;
+  align-items: stretch;
+}
+.hide-status-bar .window-wrapper {
+  border-bottom: 1px solid #DBDBDB;
+  border-radius: 0 0 5px 5px;
+}
+.current-window .window-wrapper {
+  border-left-color: #AFAFAF;
+  border-right-color: #AFAFAF;
+}
+.window-sidebar {
+  background-color: #f6f6f6;
+  border-right: 1px solid #DBDBDB;
+  max-width: 400px;
+  min-width: 100px;
+  position: relative;
+  width: 185px;
+}
+.hide-status-bar .window-sidebar {
+  border-radius: 0 0 0 5px;
+}
+.current-window .window-sidebar {
+  background-color: rgba(246, 246, 246, 0.97);
+  border-right-color: #AFAFAF;
+}
+.window-content {
+  background-color: #fff;
+  position: relative;
+  flex: 1;
+}
+.hide-status-bar .window-content {
+  border-radius: 0 0 5px 0;
+}
+.window-overflow {
+  bottom: 0;
+  overflow: auto;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+.window .content-wrapper {
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 3;
+}
+.window .content-wrapper p {
+  margin: 0;
+}
+
+.status-bar {
+  background: #FBFBFB;
+  border: 1px solid #DBDBDB;
+  border-radius: 0 0 5px 5px;
+  position: relative;
+  z-index: 0;
+}
+.current-window .status-bar {
+  background: linear-gradient(to bottom, #E9E7E9 0%, #D8D6D8 100%);
+  border-color: #AFAFAF;
+  box-shadow: inset 0 1px 0 0 #f5f4f5;
+}
+.status-bar .info {
+  display: block;
+  font-size: 11px;
+  line-height: 22px;
+  opacity: 0.75;
+  text-align: center;
+}
+
+.native-tabs {
+  margin-bottom: -1px;
+}
+.native-tabs ul {
+  border-bottom: 1px solid #DBDBDB;
+  border-top: 1px solid #DBDBDB;
+  display: flex;
+  height: 24px;
+  position: relative;
+  transition: 0.2s height;
+  justify-content: flex-end;
+  flex-wrap: nowrap;
+}
+.current-window .native-tabs ul {
+  background: linear-gradient(to bottom, #C7C6C7 0%, #C2C0C2 100%);
+  border-bottom-color: #AFAFAF;
+  border-top-color: #AFAFAF;
+}
+.hide-tabs .native-tabs ul {
+  border-bottom: 0;
+  height: 0;
+}
+.native-tabs .tab {
+  background: #ECECEC;
+  border-left: 1px solid #DBDBDB;
+  border-right: 1px solid #DBDBDB;
+  position: relative;
+  margin-right: -1px;
+  width: 100%;
+  z-index: 0;
+  flex: 1;
+}
+.native-tabs .tab.removing {
+  flex-grow: 0.000001;
+  overflow: hidden;
+  transition: all 0.2s;
+}
+.current-window .native-tabs .tab {
+  background: linear-gradient(to bottom, #C7C6C7 0%, #C2C0C2 100%);
+  border-left-color: #AFAFAF;
+  border-right-color: #AFAFAF;
+}
+.current-window .native-tabs .tab:hover {
+  background: linear-gradient(to bottom, #C2C1C2 0%, #BAB9BA 100%);
+}
+.current-window .native-tabs .tab:active {
+  background: linear-gradient(to bottom, #9E9C9E 0%, #969596 100%);
+}
+.native-tabs .tab.tab-active {
+  background: #F6F6F6;
+}
+.current-window .native-tabs .tab.tab-active {
+  background: linear-gradient(to bottom, #D8D7D8 0%, #D2D0D2 100%);
+}
+.native-tabs .tab a {
+  color: #000;
+  display: block;
+  font-size: 11px;
+  line-height: 16px;
+  overflow: hidden;
+  padding: 3px 18px 3px 28px;
+  position: relative;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+}
+.native-tabs .tab:hover .close-tab {
+  opacity: 1;
+}
+.native-tabs .close-tab {
+  border-radius: 3px;
+  height: 16px;
+  left: 3px;
+  opacity: 0;
+  position: absolute;
+  top: 3px;
+  width: 16px;
+}
+.native-tabs .close-tab:hover {
+  background-color: #ABAAAB;
+}
+.native-tabs .close-tab:active {
+  background-color: #9B9A9B;
+}
+.native-tabs .close-tab:before, .native-tabs .close-tab:after {
+  background-color: #666;
+  content: "";
+  position: absolute;
+  transform: rotate(45deg);
+}
+.native-tabs .close-tab:before {
+  height: 11px;
+  left: 50%;
+  margin-top: -5px;
+  top: 50%;
+  width: 1px;
+}
+.native-tabs .close-tab:after {
+  height: 1px;
+  left: 50%;
+  margin-left: -5px;
+  top: 50%;
+  width: 11px;
+}
+.native-tabs .new-tab {
+  background: #ECECEC;
+  border-left: 1px solid #DBDBDB;
+  border-right: 1px solid #DBDBDB;
+  bottom: 0;
+  position: absolute;
+  right: 0;
+}
+.hide-tabs .native-tabs .new-tab {
+  bottom: 1px;
+}
+.current-window .native-tabs .new-tab {
+  background: linear-gradient(to bottom, #C7C6C7 0%, #C2C0C2 100%);
+  border-left-color: #AFAFAF;
+  border-right-color: #AFAFAF;
+}
+.current-window .native-tabs .new-tab:hover {
+  background: linear-gradient(to bottom, #C2C1C2 0%, #BAB9BA 100%);
+}
+.current-window .native-tabs .new-tab:active {
+  background: linear-gradient(to bottom, #9E9C9E 0%, #969596 100%);
+}
+.native-tabs .btn-new-tab {
+  display: block;
+  font-weight: 300;
+  height: 22px;
+  line-height: 20px;
+  text-align: center;
+  width: 22px;
+}
+
+.slider-wrapper {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.ui-slider {
+  height: 22px;
+  margin: 0 10px;
+  position: relative;
+  width: 80px;
+}
+.ui-slider:before {
+  background-color: #AFAFAF;
+  border-radius: 2px;
+  content: "";
+  height: 3px;
+  margin: -1px 0 0;
+  position: absolute;
+  top: 50%;
+  width: 100%;
+}
+
+.ui-slider-handle {
+  background: linear-gradient(to bottom, #FEFDFE 0%, #FDFCFD 100%);
+  border: 1px solid #AFAFAF;
+  border-radius: 6px;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+  display: inline-block;
+  height: 12px;
+  margin-left: -5px;
+  margin-top: 6px;
+  outline: none;
+  position: relative;
+  width: 12px;
+}
+
+.ui-slider-range {
+  background-color: #3A9DFA;
+  border-radius: 2px 0 0 2px;
+  display: block;
+  height: 3px;
+  left: 0;
+  position: absolute;
+  top: 10px;
+}
+
+.ui-resizable-handle {
+  display: block;
+  font-size: 0.1px;
+  position: absolute;
+  z-index: 99999;
+}
+
+.ui-resizable-n {
+  cursor: ns-resize;
+  height: 5px;
+  left: 0;
+  top: -5px;
+  width: 100%;
+}
+
+.ui-resizable-e {
+  cursor: ew-resize;
+  height: 100%;
+  right: 0;
+  top: 0;
+  width: 5px;
+}
+
+.ui-resizable-s {
+  bottom: 0;
+  cursor: ns-resize;
+  height: 5px;
+  left: 0;
+  width: 100%;
+}
+
+.ui-resizable-w {
+  cursor: ew-resize;
+  height: 100%;
+  left: 0;
+  top: 0;
+  width: 5px;
+}
+
+.ui-resizable-se {
+  bottom: 0;
+  cursor: nwse-resize;
+  height: 9px;
+  right: 0;
+  width: 9px;
+}
+
+.ui-resizable-sw {
+  bottom: 0;
+  cursor: nesw-resize;
+  height: 9px;
+  left: 0;
+  width: 9px;
+}
+
+.ui-resizable-ne {
+  cursor: nesw-resize;
+  height: 9px;
+  right: 0;
+  top: -5px;
+  width: 9px;
+}
+
+.ui-resizable-nw {
+  cursor: nwse-resize;
+  height: 9px;
+  left: -5px;
+  top: -5px;
+  width: 9px;
+}
+
+.finder .window-actions {
+  padding: 5px 8px;
+}
+
+.sidebar-nav {
+  bottom: 0;
+  left: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.sidebar-nav a {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.sidebar-nav .sub-heading {
+  color: #888;
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 12px;
+  padding: 8px 25px 8px 9px;
+}
+.sidebar-nav .sub-heading .toggle-nav {
+  display: none;
+  float: right;
+}
+.sidebar-nav .sub-heading:hover .toggle-nav {
+  display: block;
+}
+.sidebar-nav .child-nav a {
+  color: #444;
+  font-size: 13px;
+  line-height: 24px;
+  padding: 0 10px 0 42px;
+  position: relative;
+}
+.sidebar-nav .child-nav .active a {
+  background-color: rgba(0, 0, 0, 0.15);
+  color: #222;
+}
+.sidebar-nav .icon-sidebar {
+  display: block;
+  position: absolute;
+  width: 18px;
+  top: 3px;
+  left: 18px;
+  opacity: 0.55;
+}
+.sidebar-nav .icon-sidebar.icon-album {
+  opacity: 1;
+  border-radius: 3px;
+  overflow: hidden;
+}
+.sidebar-nav .icon-sidebar img {
+  display: block;
+}
+
+.safari {
+  height: 80%;
+  width: 80%;
+}
+.safari.hide-tabs .window-actions {
+  padding: 13px 36px 13px 12px;
+}
+.safari-body {
+  background-color: #fff;
+  border: 1px solid #DBDBDB;
+  border-radius: 0 0 5px 5px;
+  border-top: 0;
+  height: 100%;
+}
+.current-window .safari-body {
+  border-color: #AFAFAF;
+}
+.safari-body iframe {
+  width: 100%;
+  height: 100%;
+}
+
+.navigation-bar {
+  width: 100%;
+  margin: -5px 0 -5px 12px;
+  display: flex;
+  background-color:white;
+  
+}
+.navigation-bar .window-nav {
+  padding: 0;
+  width: 100%;
+}
+
+.url-bar {
+  width: 100%;
+}
+.url-bar .text-field {
+  display: block;
+  min-width: 0;
+}
+
+.photos {
+  width: 90%;
+  height: 85%;
+  top: 5%;
+  left: 5%;
+  min-width: 900px;
+}
+
+.album-wrapper {
+  padding: 8px;
+  position: relative;
+}
+
+.album-title-bar {
+  left: 0;
+  padding: 0 16px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 1;
+}
+.album-title-bar:before {
+  background: #fff;
+  content: "";
+  left: 0;
+  opacity: 0.95;
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: -1;
+  border-bottom: 1px solid #DBDBDB;
+}
+.current-window .album-title-bar:before {
+  background: linear-gradient(to bottom, #E9E7E9 0%, #D8D6D8 100%);
+  border-bottom-color: #AFAFAF;
+  box-shadow: inset 0 1px 0 0 #f5f4f5;
+}
+.album-title-bar .album-title {
+  float: left;
+  line-height: 32px;
+  display: block;
+  font-size: 13px;
+  color: #000;
+}
+.album-title-bar .album-date {
+  float: left;
+  margin-left: 1em;
+  line-height: 32px;
+  display: block;
+  font-size: 13px;
+  color: #777;
+}
+.album-title-bar .photo-count {
+  float: right;
+  line-height: 32px;
+  display: block;
+  font-size: 13px;
+  color: #777;
+}
+
+.album-photos {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  padding: 40px 8px 8px;
+}
+.album-photos img {
+  display: inline-block;
+  vertical-align: middle;
+  max-height: 100%;
+  max-width: 100%;
+  border: 1px solid transparent;
+}
+.album-photos .image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: 0.4s all;
+}
+.album-photos .image:before {
+  content: "";
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+.album-photos .image-large {
+  position: absolute;
+  z-index: 1;
+  background-color: #fff;
+  transition: 0.4s all;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.album-photos .image-large:before {
+  content: "";
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+.album-photos .photo-wrapper {
+  position: relative;
+  padding-bottom: 100%;
+  z-index: 0;
+  transition: 0.4s all;
+}
+.album-photos .photo {
+  display: block;
+  padding: 8px;
+  text-align: center;
+  float: left;
+}
+.album-photos .photo.photo__selected img {
+  border-radius: 3px;
+  box-shadow: 0 0 0 3px #116CD6;
+}
+.album-photos .photo.photo__zoomed .photo-wrapper {
+  position: inherit;
+}
+.album-photos .photo.photo__zoomed img {
+  border-radius: 0;
+  box-shadow: 0 0 0 0 transparent;
+}
+
+.grid-4 .photo {
+  width: 25%;
+}
+.grid-4 .photo:nth-child(4n+1) {
+  clear: both;
+}
+
+.grid-5 .photo {
+  width: 20%;
+}
+.grid-5 .photo:nth-child(5n+1) {
+  clear: both;
+}
+
+.grid-6 .photo {
+  width: 16.6666666667%;
+}
+.grid-6 .photo:nth-child(6n+1) {
+  clear: both;
+}
+
+.grid-7 .photo {
+  width: 14.2857142857%;
+}
+.grid-7 .photo:nth-child(7n+1) {
+  clear: both;
+}
+
+.grid-8 .photo {
+  width: 12.5%;
+}
+.grid-8 .photo:nth-child(8n+1) {
+  clear: both;
+}
+
+.grid-9 .photo {
+  width: 11.1111111111%;
+}
+.grid-9 .photo:nth-child(9n+1) {
+  clear: both;
+}
+
+.grid-10 .photo {
+  width: 10%;
+}
+.grid-10 .photo:nth-child(10n+1) {
+  clear: both;
+}
+
+.zoomed-photo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #fff;
+  z-index: 10;
+}
+.zoomed-photo img {
+  position: relative;
+  top: 50%;
+  display: block;
+}
+
+.twitter {
+  height: 90%;
+  width: 400px;
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+  <script>
+  if (document.location.search.match(/type=embed/gi)) {
+    window.parent.postMessage("resize", "*");
+  }
+</script>
+
+
+</head>
+
+<body translate="no" >
+  <svg style="position: absolute; width: 0; height: 0;" width="0" height="0" version="1.1"
+     xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <symbol id="icon-button-back" viewBox="0 0 597 1024">
+            <title>button-back</title>
+            <path class="path1"
+                  d="M485.69 62.304l-455.443 460.821 448.232 446.757c16.69 16.635 43.705 16.59 60.34-0.099s16.59-43.705-0.099-60.34l-418.14-416.764 0.226 60.212 425.577-430.603c16.564-16.76 16.406-43.774-0.354-60.339s-43.774-16.406-60.339 0.354v0z"></path>
+        </symbol>
+        <symbol id="icon-button-forward" viewBox="0 0 597 1024">
+            <title>button-forward</title>
+            <path class="path1"
+                  d="M50.951 122.288l425.577 430.603 0.226-60.212-418.14 416.764c-16.69 16.635-16.734 43.65-0.099 60.34s43.65 16.734 60.34 0.099l448.232-446.757-455.443-460.821c-16.564-16.76-43.579-16.918-60.339-0.354s-16.918 43.579-0.354 60.339v0z"></path>
+        </symbol>
+        <symbol id="icon-darr" viewBox="0 0 1843 1024">
+            <title>darr</title>
+            <path class="path1"
+                  d="M153.058 286.047l767.421 660.491 789.247-651.085c43.625-35.989 49.816-100.528 13.828-144.154s-100.528-49.816-144.154-13.828l-722.685 596.176 131.961 1.378-702.021-604.204c-42.864-36.892-107.519-32.050-144.411 10.814s-32.050 107.519 10.814 144.411v0z"></path>
+        </symbol>
+        <symbol id="icon-notification-center" viewBox="0 0 1843 1024">
+            <title>notification-center</title>
+            <path class="path1"
+                  d="M409.6 819.2v204.8h1433.6v-204.8h-1433.6zM0 819.2v204.8h204.8v-204.8h-204.8zM409.6 409.6v204.8h1126.4v-204.8h-1126.4zM0 409.6v204.8h204.8v-204.8h-204.8zM409.6 0v204.8h1433.6v-204.8h-1433.6zM0 0v204.8h204.8v-204.8h-204.8z"></path>
+        </symbol>
+        <symbol id="icon-sort-by" viewBox="0 0 1195 1024">
+            <title>sort-by</title>
+            <path class="path1"
+                  d="M85.333 0v0 341.333l-85.333-85.333h341.333l-85.333 85.333v-341.333l85.333 85.333h-341.333l85.333-85.333zM0 0h341.333v341.333h-341.333v-341.333zM512 0v341.333l-85.333-85.333h341.333l-85.333 85.333v-341.333l85.333 85.333h-341.333l85.333-85.333zM426.667 0h341.333v341.333h-341.333v-341.333zM938.667 0v341.333l-85.333-85.333h341.333l-85.333 85.333v-341.333l85.333 85.333h-341.333l85.333-85.333zM853.333 0h341.333v341.333h-341.333v-341.333zM85.333 597.333v341.333l-85.333-85.333h341.333l-85.333 85.333v-341.333l85.333 85.333h-341.333l85.333-85.333zM0 597.333h341.333v341.333h-341.333v-341.333zM512 597.333v341.333l-85.333-85.333h341.333l-85.333 85.333v-341.333l85.333 85.333h-341.333l85.333-85.333zM426.667 597.333h341.333v341.333h-341.333v-341.333zM938.667 597.333v341.333l-85.333-85.333h341.333l-85.333 85.333v-341.333l85.333 85.333h-341.333l85.333-85.333zM853.333 597.333v0h341.333v341.333h-341.333v-341.333z"></path>
+        </symbol>
+        <symbol id="icon-spotlight" viewBox="0 0 1062 1024">
+            <title>spotlight</title>
+            <path class="path1"
+                  d="M629.542 664.215c-66.785 58.705-154.377 94.304-250.283 94.304-209.459 0-379.259-169.8-379.259-379.259s169.8-379.259 379.259-379.259c209.459 0 379.259 169.8 379.259 379.259 0 86.22-28.771 165.721-77.237 229.424l362.076 362.076-53.635 53.635-360.18-360.18zM379.259 682.667c167.567 0 303.407-135.84 303.407-303.407s-135.84-303.407-303.407-303.407c-167.567 0-303.407 135.84-303.407 303.407s135.84 303.407 303.407 303.407z"></path>
+        </symbol>
+        <symbol id="icon-view-as-columns" viewBox="0 0 1638 1024">
+            <title>view-as-columns</title>
+            <path class="path1"
+                  d="M102.4 102.4v0 819.2h1433.6v-819.2h-1433.6zM102.4 0v0h1536v1024h-1638.4v-1024h102.4z"></path>
+            <path class="path2" d="M512 51.2v972.8h102.4v-1024h-102.4v51.2z"></path>
+            <path class="path3" d="M1024 51.2v972.8h102.4v-1024h-102.4v51.2z"></path>
+        </symbol>
+        <symbol id="icon-view-as-coverflow" viewBox="0 0 1434 1024">
+            <title>view-as-coverflow</title>
+            <path class="path1"
+                  d="M512 307.2v409.6h409.6v-409.6h-409.6zM409.6 307.2v0-102.4h614.4v614.4h-614.4v-512z"></path>
+            <path class="path2" d="M204.8 102.4h102.4v819.2h-102.4v-819.2z"></path>
+            <path class="path3" d="M1126.4 102.4h102.4v819.2h-102.4v-819.2z"></path>
+            <path class="path4" d="M1331.2 0h102.4v1024h-102.4v-1024z"></path>
+            <path class="path5" d="M0 0h102.4v1024h-102.4v-1024z"></path>
+        </symbol>
+        <symbol id="icon-view-as-icons" viewBox="0 0 1024 1024">
+            <title>view-as-icons</title>
+            <path class="path1"
+                  d="M102.4 102.4v0 204.8h204.8v-204.8h-204.8zM102.4 0v0h307.2v409.6h-409.6v-409.6h102.4z"></path>
+            <path class="path2"
+                  d="M716.8 102.4v0 204.8h204.8v-204.8h-204.8zM716.8 0v0h307.2v409.6h-409.6v-409.6h102.4z"></path>
+            <path class="path3"
+                  d="M716.8 716.8v0 204.8h204.8v-204.8h-204.8zM716.8 614.4v0h307.2v409.6h-409.6v-409.6h102.4z"></path>
+            <path class="path4"
+                  d="M102.4 716.8v0 204.8h204.8v-204.8h-204.8zM102.4 614.4v0h307.2v409.6h-409.6v-409.6h102.4z"></path>
+        </symbol>
+        <symbol id="icon-view-as-list" viewBox="0 0 1434 1024">
+            <title>view-as-list</title>
+            <path class="path1" d="M0 0h1433.6v102.4h-1433.6v-102.4z"></path>
+            <path class="path2" d="M0 307.2h1433.6v102.4h-1433.6v-102.4z"></path>
+            <path class="path3" d="M0 614.4h1433.6v102.4h-1433.6v-102.4z"></path>
+            <path class="path4" d="M0 921.6h1433.6v102.4h-1433.6v-102.4z"></path>
+        </symbol>
+        <symbol id="icon-wifi" viewBox="0 0 1434 1024">
+            <title>wifi</title>
+            <path class="path1"
+                  d="M21.537 321.459c144.722-193.040 401.996-321.459 695.263-321.459s550.542 128.42 695.263 321.459v0l-48.635 48.635c-130.749-180.678-371.397-301.827-646.629-301.827s-515.88 121.15-646.629 301.827l-48.635-48.635zM438.976 738.899c80.858-57.317 176-90.365 277.824-90.365s196.966 33.048 277.824 90.365l44.059-44.059c-92.107-72.377-202.806-114.573-321.883-114.573s-229.775 42.197-321.883 114.573l44.059 44.059zM253.899 553.822c118.768-110.245 282.328-178.355 462.901-178.355s344.133 68.11 462.901 178.355l45.345-45.345c-129.824-124.319-309.598-201.277-508.245-201.277s-378.422 76.958-508.245 201.277l45.345 45.345zM618.292 918.214c10.714-8.625 43.55-30.748 98.508-30.748s87.795 22.122 98.508 30.748v0l-98.508 98.508-98.508-98.508z"></path>
+        </symbol>
+    </defs>
+</svg>
+
+<header class="menu-bar">
+    <nav role="navigation">
+        <ul class="menu contextual-menu">
+            <li class="system-menu">
+                <a href="#nolink"><img src="apple.jpg" height="20" width="20"> </img></a>
+                <ul class="dropdown">
+                    <li><a href="#nolink">About This Mac</a></li>
+                    <li class="separator"></li>
+                    <li><a href="#nolink">System Preferences...</a></li>
+                    <li><a href="#nolink">App Store...</a></li>
+                    <li class="separator"></li>
+                    <li class="has-sub">
+                        <a href="#nolink">Recent Items</a>
+                        <ul class="dropdown child-nav">
+                            <li>
+                                <a href="#nolink">Recent Item</a>
+                            </li>
+                            <li>
+                                <a href="#nolink">Recent Item</a>
+                            </li>
+                            <li>
+                                <a href="#nolink">Recent Item</a>
+                            </li>
+                            <li>
+                                <a href="#nolink">Recent Item</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="separator"></li>
+                    <li><a href="#nolink">Force Quit...<span class="shortcut">⌥⇧⌘⎋</span></a></li>
+                    <li class="separator"></li>
+                    <li><a href="#nolink">Sleep</a></li>
+                    <li><a href="">Restart...</a></li>
+                    <li><a href="http://vladshap.com">Shut Down...</a></li>
+                    <li class="separator"></li>
+                    <li><a href="http://vladshap.com">Log Out Vlad Shapochnikov..
+                        .<span class="shortcut">⇧⌘Q</span></a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#nolink"><strong>Finder</strong></a>
+                <ul class="dropdown">
+                    <li><a href="#nolink">Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                    <li><a href="#nolink">Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                    <li><a href="#nolink">Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                    <li class="separator"></li>
+                    <li><a href="#nolink">Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                    <li><a href="#nolink">Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                    <li class="has-sub">
+                        <a href="#nolink">Has Sub</a>
+                        <ul class="dropdown child-nav">
+                            <li><a href="#nolink">Sub Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                            <li><a href="#nolink">Sub Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                            <li><a href="#nolink">Sub Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                            <li class="separator"></li>
+                            <li><a href="#nolink">Sub Option</a></li>
+                        </ul>
+                    </li>
+                    <li class="separator"></li>
+                    <li><a href="#nolink">Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                    <li><a href="#nolink">Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                    <li><a href="#nolink">Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                </ul>
+            </li>
+
+
+            <li>
+                <a href="#nolink">File</a>
+                <ul class="dropdown">
+                    <li><a href="#nolink">Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                    <li><a href="#nolink">Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                    <li><a href="#nolink">Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                    <li class="separator"></li>
+                    <li><a href="#nolink">Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                    <li><a href="#nolink">Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                    <li class="has-sub">
+                        <a href="#nolink">Has Sub</a>
+                        <ul class="dropdown child-nav">
+                            <li><a href="#nolink">Sub Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                            <li><a href="#nolink">Sub Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                            <li><a href="#nolink">Sub Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                            <li class="separator"></li>
+                            <li><a href="#nolink">Sub Option</a></li>
+                        </ul>
+                    </li>
+                    <li class="separator"></li>
+                    <li><a href="#nolink">Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                    <li><a href="#nolink">Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                    <li><a href="#nolink">Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#nolink">Edit</a>
+                <ul class="dropdown">
+                    <li><a href="#nolink">Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                    <li><a href="#nolink">Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                    <li><a href="#nolink">Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                    <li class="separator"></li>
+                    <li><a href="#nolink">Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                    <li><a href="#nolink">Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                    <li class="has-sub">
+                        <a href="#nolink">Has Sub</a>
+                        <ul class="dropdown child-nav">
+                            <li><a href="#nolink">Sub Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                            <li><a href="#nolink">Sub Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                            <li><a href="#nolink">Sub Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                            <li class="separator"></li>
+                            <li><a href="#nolink">Sub Option</a></li>
+                        </ul>
+                    </li>
+                    <li class="separator"></li>
+                    <li><a href="#nolink">Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                    <li><a href="#nolink">Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                    <li><a href="#nolink">Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#nolink">View</a>
+                <ul class="dropdown">
+                    <li><a href="#nolink">Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                    <li><a href="#nolink">Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                    <li><a href="#nolink">Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                    <li class="separator"></li>
+                    <li><a href="#nolink">Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                    <li><a href="#nolink">Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                    <li class="has-sub">
+                        <a href="#nolink">Has Sub</a>
+                        <ul class="dropdown child-nav">
+                            <li><a href="#nolink">Sub Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                            <li><a href="#nolink">Sub Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                            <li><a href="#nolink">Sub Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                            <li class="separator"></li>
+                            <li><a href="#nolink">Sub Option</a></li>
+                        </ul>
+                    </li>
+                    <li class="separator"></li>
+                    <li><a href="#nolink">Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                    <li><a href="#nolink">Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                    <li><a href="#nolink">Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#nolink">Go</a>
+                <ul class="dropdown">
+                    <li><a href="#nolink">Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                    <li><a href="#nolink">Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                    <li><a href="#nolink">Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                    <li class="separator"></li>
+                    <li><a href="#nolink">Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                    <li><a href="#nolink">Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                    <li class="has-sub">
+                        <a href="#nolink">Has Sub</a>
+                        <ul class="dropdown child-nav">
+                            <li><a href="#nolink">Sub Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                            <li><a href="#nolink">Sub Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                            <li><a href="#nolink">Sub Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                            <li class="separator"></li>
+                            <li><a href="#nolink">Sub Option</a></li>
+                        </ul>
+                    </li>
+                    <li class="separator"></li>
+                    <li><a href="#nolink">Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                    <li><a href="#nolink">Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                    <li><a href="#nolink">Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#nolink">Window</a>
+                <ul class="dropdown">
+                    <li><a href="#nolink">Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                    <li><a href="#nolink">Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                    <li><a href="#nolink">Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                    <li class="separator"></li>
+                    <li><a href="#nolink">Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                    <li><a href="#nolink">Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                    <li class="has-sub">
+                        <a href="#nolink">Has Sub</a>
+                        <ul class="dropdown child-nav">
+                            <li><a href="#nolink">Sub Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                            <li><a href="#nolink">Sub Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                            <li><a href="#nolink">Sub Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                            <li class="separator"></li>
+                            <li><a href="#nolink">Sub Option</a></li>
+                        </ul>
+                    </li>
+                    <li class="separator"></li>
+                    <li><a href="#nolink">Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                    <li><a href="#nolink">Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                    <li><a href="#nolink">Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#nolink">Help</a>
+                <ul class="dropdown">
+                    <li><a href="#nolink">Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                    <li><a href="#nolink">Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                    <li><a href="#nolink">Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                    <li class="separator"></li>
+                    <li><a href="#nolink">Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                    <li><a href="#nolink">Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                    <li class="has-sub">
+                        <a href="#nolink">Has Sub</a>
+                        <ul class="dropdown child-nav">
+                            <li><a href="#nolink">Sub Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                            <li><a href="#nolink">Sub Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                            <li><a href="#nolink">Sub Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                            <li class="separator"></li>
+                            <li><a href="#nolink">Sub Option</a></li>
+                        </ul>
+                    </li>
+                    <li class="separator"></li>
+                    <li><a href="#nolink">Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                    <li><a href="#nolink">Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                    <li><a href="#nolink">Option<span class="shortcut">⇧⇪⌘⌥⌃</span></a></li>
+                </ul>
+            </li>
+        </ul>
+        <ul class="menu extras-menu">
+
+            <li>
+                <a href="#nolink">
+                    <svg class="icon icon-wifi">
+                        <use xlink:href="#icon-wifi"></use>
+                    </svg>
+                </a>
+            </li>
+
+            <li>
+                <a href="#nolink" class="date-time"></a>
+
+                <ul class="dropdown">
+
+                    <li>
+                        <a href="#nolink" class="full-date"></a>
+                    </li>
+                    <li class="separator"></li>
+                    <li><a href="#nolink">View As Analog</a></li>
+                    <li><a href="#nolink">View As Digital</a></li>
+                    <li class="separator"></li>
+                    <li><a href="#nolink">Open Date &amp; Time Preferences...</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#nolink">
+                    <svg class="icon icon-spotlight">
+                        <use xlink:href="#icon-spotlight"></use>
+                    </svg>
+                </a>
+            </li>
+            <li>
+                <a href="#nolink">
+                    <svg class="icon icon-notification-center">
+                        <use xlink:href="#icon-notification-center"></use>
+                    </svg>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <span class="blur"></span>
+</header>
+
+<main class="screen">
+    <div class="window finder window-closed" id="finder">
+        <div class="window-header">
+            <div class="window-actions">
+                <ul class="window-controls">
+                    <li><a class="window-close"><span class="vh">Close Window</span></a></li>
+                    <li><a class="window-minimize"><span class="vh">Minimize Window</span></a></li>
+                    <li><a class="window-zoom"><span class="vh">Zoom Window</span></a></li>
+                </ul>
+                <span class="window-title"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/30668/sidebar-desktop.png" 
+                                                class="title-icon" alt=""/> <span
+                        class="title">Desktop</span></span>
+
+            </div>
+            <div class="window-nav">
+                <div class="group">
+                    <div class="btn-group split">
+                        <button class="btn btn-back">
+                            <svg class="icon icon-button-back">
+                                <use xlink:href="#icon-button-back"></use>
+                            </svg>
+                        </button>
+                        <button class="btn btn-forward" disabled>
+                            <svg class="icon icon-button-forward">
+                                <use xlink:href="#icon-button-forward"></use>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="group">
+                    <div class="btn-group tight sort-controls">
+                        <button class="btn">
+                            <svg class="icon icon-view-as-icons">
+                                <use xlink:href="#icon-view-as-icons"></use>
+                            </svg>
+                        </button>
+                        <button class="btn">
+                            <svg class="icon icon-view-as-list">
+                                <use xlink:href="#icon-view-as-list"></use>
+                            </svg>
+                        </button>
+                        <button class="btn selected">
+                            <svg class="icon icon-view-as-columns">
+                                <use xlink:href="#icon-view-as-columns"></use>
+                            </svg>
+                        </button>
+                        <!--            <button class="btn">
+                                      <svg class="icon icon-view-as-coverflow">
+                                        <use xlink:href="#icon-view-as-coverflow"></use>
+                                      </svg>
+                                    </button>-->
+                    </div>
+                    <!--          <div class="btn-group">
+                                <button class="btn">
+                                  <svg class="icon icon-sort-by">
+                                    <use xlink:href="#icon-sort-by"></use>
+                                  </svg>
+                                </button>
+                                <button class="btn">2</button>
+                                <button class="btn">2</button>
+                                <button class="btn">2</button>
+                              </div>-->
+                </div>
+                <div class="group search">
+                    <label for="search" class="vh">Search</label>
+                    <input type="text" class="text-field" id="search" placeholder="Search" required autocomplete="off"/>
+                    <span class="outline"></span>
+                </div>
+            </div>
+            <nav class="native-tabs">
+                <ul class="">
+                    <li class="tab tab-active"><a href="#nolink"><span class="close-tab"><span class="vh">Close Tab</span></span>Desktop</a></li>
+                    <li class="tab"><a href="#nolink"><span class="close-tab"><span class="vh">Close Tab</span></span>Documents</a></li>
+                    <li class="new-tab ui-state-disabled"><span class="btn-new-tab">+</span></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="window-body">
+            <div class="window-wrapper">
+                <aside class="window-sidebar">
+                    <nav class="sidebar-nav" role="navigation">
+                        <ul>
+                            <li>
+                                <span class="sub-heading">Favorites <span class="toggle-nav">Hide</span></span>
+                                <ul class="child-nav">
+                                    <li><a href="#nolink"><i class="icon-sidebar"><img
+                                            src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/30668/sidebar-airdrop.png" alt="AirDrop Icon"/></i>AirDrop</a>
+                                    </li>
+                                    <li><a href="#nolink"><i class="icon-sidebar"><img
+                                            src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/30668/sidebar-applications.png" alt="Applications Icon"/></i>Applications</a>
+                                    </li>
+                                    <li class="active"><a href="#nolink"><i class="icon-sidebar"><img
+                                            src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/30668/sidebar-desktop.png" alt="AirDrop Icon"/></i>Desktop</a>
+                                    </li>
+                                    <li><a href="#nolink"><i class="icon-sidebar"><img
+                                            src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/30668/sidebar-documents.png" alt="Documents Icon"/></i>Documents</a>
+                                    </li>
+                                    <li><a href="#nolink"><i class="icon-sidebar"><img
+                                            src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/30668/sidebar-downloads.png" alt="Downloads Icon"/></i>Downloads</a>
+                                    </li>
+                                    <li><a href="#nolink"><i class="icon-sidebar"><img
+                                            src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/30668/sidebar-movies.png" alt="Movies Icon"/></i>Movies</a></li>
+                                    <li><a href="#nolink"><i class="icon-sidebar"><img
+                                            src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/30668/sidebar-music.png" alt="Music Icon"/></i>Music</a></li>
+                                    <li><a href="#nolink"><i class="icon-sidebar"><img
+                                            src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/30668/sidebar-pictures.png" alt="Pictures Icon"/></i>Pictures</a>
+                                    </li>
+                                    <li><a href="#nolink"><i class="icon-sidebar"><img
+                                            src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/30668/sidebar-home.png" alt="Vlad Icon"/></i>Vlad</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                </aside>
+                <div class="window-content">
+
+                </div>
+            </div>
+        </div>
+        <div class="status-bar">
+            <span class="info">14 items, 111.44 GB available</span>
+        </div>
+    </div>
+    <div class="window safari window-closed" id="safari">
+        <div class="window-header">
+            <div class="window-actions combined-actions">
+                <ul class="window-controls">
+                    <li><a class="window-close"><span class="vh">Close Window</span></a></li>
+                    <li><a class="window-minimize"><span class="vh">Minimize Window</span></a></li>
+                    <li><a class="window-zoom"><span class="vh">Zoom Window</span></a></li>
+                </ul>
+                <div class="navigation-bar">
+                    <div class="group">
+                        <div class="btn-group split">
+                            <button class="btn btn-back">
+                                <svg class="icon icon-button-back">
+                                    <use xlink:href="#icon-button-back"></use>
+                                </svg>
+                            </button>
+                            <button class="btn btn-forward" disabled>
+                                <svg class="icon icon-button-forward">
+                                    <use xlink:href="#icon-button-forward"></use>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="group url-bar">
+                        <label for="url" class="vh">Search or enter website name</label>
+                        <input type="text" class="text-field" id="url" placeholder="Search or enter website name" required autocomplete="off"/>
+                        <span class="outline"></span>
+                    </div>
+                </div>
+            </div>
+            <nav class="native-tabs">
+                <ul class="">
+                    <li class="tab tab-active"><a href="#nolink"><span class="close-tab"><span class="vh">Close Tab</span></span>CodePen</a></li>
+                    <li class="tab"><a href="#nolink"><span class="close-tab"><span class="vh">Close Tab</span></span>Top Sites</a></li>
+                    <li class="new-tab ui-state-disabled"><span class="btn-new-tab">+</span></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="safari-body">
+            <iframe src="https://bing.com/" frameborder="0"></iframe>
+        </div>
+    </div>
+    <div class="window photos window-closed hide-status-bar" id="photos">
+        <div class="window-header">
+            <div class="window-actions combined-actions">
+                <ul class="window-controls">
+                    <li><a class="window-close"><span class="vh">Close Window</span></a></li>
+                    <li><a class="window-minimize"><span class="vh">Minimize Window</span></a></li>
+                    <li><a class="window-zoom"><span class="vh">Zoom Window</span></a></li>
+                </ul>
+                <div class="navigation-bar">
+                    <div class="window-nav">
+                        <div class="group">
+                            <div class="btn-group split">
+                                <button class="btn btn-back">
+                                    <svg class="icon icon-button-back">
+                                        <use xlink:href="#icon-button-back"></use>
+                                    </svg>
+                                </button>
+                                <button class="btn btn-forward" disabled>
+                                    <svg class="icon icon-button-forward">
+                                        <use xlink:href="#icon-button-forward"></use>
+                                    </svg>
+                                </button>
+                                <div class="slider-wrapper">
+                                    <div class="thumb-size-slider"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="group search">
+                            <label for="search-photos" class="vh">Search</label>
+                            <input type="text" class="text-field" id="search-photos" placeholder="Search" required autocomplete="off"/>
+                            <span class="outline"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="window-body">
+            <div class="window-wrapper">
+                <aside class="window-sidebar">
+                    <nav class="sidebar-nav" role="navigation">
+                        <ul>
+                            <li>
+                                <span class="sub-heading">Albums <span class="toggle-nav">Hide</span></span>
+                                <ul class="child-nav photo-albums">
+                                    <li class="active">
+                                        <a href="#album-all">
+                                            <i class="icon-sidebar"><img
+                                            src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/30668/sidebar-album.png" alt="Album Icon"/></i>
+                                            All Photos
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#album-faces">
+                                            <i class="icon-sidebar"><img
+                                            src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/30668/sidebar-faces.png" alt="Faces Icon"/></i>
+                                            Faces
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#album-last-import">
+                                            <i class="icon-sidebar"><img
+                                            src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/30668/sidebar-lastimport.png" alt="Last Import Icon"/></i>
+                                            Last Import
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                </aside>
+                <div class="window-content">
+                    <div class="album-title-bar">
+                        <span class="album-title"></span>
+                        <time class="album-date"></time>
+                        <span class="photo-count"></span>
+                    </div>
+                    <div class="window-overflow">
+                        <ul class="album-photos">
+                            <!--<li class="photo"><span class="photo-wrapper"><img src="http://www.fillmurray.com/600/1008" alt=""/></span></li>-->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="window twitter window-closed hide-status-bar" id="twitter">
+        <div class="window-header">
+            <div class="window-actions combined-actions">
+                <ul class="window-controls">
+                    <li><a class="window-close"><span class="vh">Close Window</span></a></li>
+                    <li><a class="window-minimize"><span class="vh">Minimize Window</span></a></li>
+                    <li><a class="window-zoom"><span class="vh">Zoom Window</span></a></li>
+                </ul>
+                <span class="window-title"><span class="title">Twitter</span></span>
+            </div>
+        </div>
+        <div class="window-body">
+            <div class="window-wrapper">
+                <aside class="window-sidebar">
+                    <nav class="sidebar-nav" role="navigation">
+                        <ul>
+                            <li>
+
+                            </li>
+                        </ul>
+                    </nav>
+                </aside>
+                <div class="window-content">
+                    <div class="window-overflow">
+                        <ul class="tweets">
+                            <li class="tweet">
+
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav class="dock">
+        <ul>
+            <li class="app running ui-state-disabled">
+                <a href="#finder">
+                    <span class="app-icon"><img src="finder.png" alt="Finder App Icon"/></span>
+                    <span class="app-title">Finder</span>
+                </a>
+            </li>
+			
+			<li class="app">
+                <a href="#mail">
+                    <span class="app-icon"><img src="lauchpad.png" alt="Mail App Icon"/></span>
+                    <span class="app-title">LaunchPad <small>(unfinished)</small></span>
+                </a>
+            </li>
+			
+			
+			<li class="app">
+                <a href="#safari">
+                    <span class="app-icon"><img src="safari.png" alt="Safari App Icon"/></span>
+                    <span class="app-title">Safari</span>
+                </a>
+            </li>
+			
+			<li class="app">
+                <a href="#safari">
+                    <span class="app-icon"><img src="messages.png" alt="Safari App Icon"/></span>
+                    <span class="app-title">Messages</span>
+                </a>
+            </li>
+			
+			<li class="app">
+                <a href="#mail">
+                    <span class="app-icon"><img src="mail.png" alt="Mail App Icon"/></span>
+                    <span class="app-title">Mail <small>(unfinished)</small></span>
+                </a>
+            </li>
+			
+			<li class="app">
+                <a href="#mail">
+                    <span class="app-icon"><img src="maps.png" alt="Mail App Icon"/></span>
+                    <span class="app-title">Maps <small>(unfinished)</small></span>
+                </a>
+            </li>
+			
+			<li class="app">
+                <a href="#photos">
+                    <span class="app-icon"><img src="photos.png" alt="Photos App Icon"/></span>
+                    <span class="app-title">Photos</span>
+                </a>
+            </li>
+			
+			 <li class="app">
+                <a href="#photos">
+                    <span class="app-icon"><img src="facetime.png" alt="Photos App Icon"/></span>
+                    <span class="app-title">Facetime</span>
+                </a>
+            </li>
+			
+			 <li class="app">
+                <a href="#photos">
+                    <span class="app-icon"><img src="calendar.png" alt="Photos App Icon"/></span>
+                    <span class="app-title">Calendar</span>
+                </a>
+            </li>
+			
+			 <li class="app">
+                <a href="#photos">
+                    <span class="app-icon"><img src="contacts.png" alt="Photos App Icon"/></span>
+                    <span class="app-title">Contacts</span>
+                </a>
+            </li>
+			
+			 <li class="app">
+                <a href="#photos">
+                    <span class="app-icon"><img src="reminder.png" alt="Photos App Icon"/></span>
+                    <span class="app-title">Reminders</span>
+                </a>
+            </li>
+			
+			<li class="app">
+                <a href="#mail">
+                    <span class="app-icon"><img src="notes.png" alt="Mail App Icon"/></span>
+                    <span class="app-title">Notes <small>(unfinished)</small></span>
+                </a>
+            </li>
+			
+			<li class="app">
+                <a href="#photos">
+                    <span class="app-icon"><img src="music.png" alt="Photos App Icon"/></span>
+                    <span class="app-title">Apple Music</span>
+                </a>
+            </li>
+			
+			
+			<li class="app">
+                <a href="#photos">
+                    <span class="app-icon"><img src="news.png" alt="Photos App Icon"/></span>
+                    <span class="app-title">Apple News</span>
+                </a>
+            </li>
+			
+			
+			<li class="app">
+                <a href="#photos">
+                    <span class="app-icon"><img src="word.png" alt="Photos App Icon"/></span>
+                    <span class="app-title">Word</span>
+                </a>
+            </li>
+			
+			<li class="app">
+                <a href="#photos">
+                    <span class="app-icon"><img src="powerpoint.png" alt="Photos App Icon"/></span>
+                    <span class="app-title">PowerPoint</span>
+                </a>
+            </li>
+			
+		   <li class="app">
+                <a href="#photos">
+                    <span class="app-icon"><img src="excel.png" alt="Photos App Icon"/></span>
+                    <span class="app-title">Excel</span>
+                </a>
+            </li>
+			
+			<li class="app">
+                <a href="#photos">
+                    <span class="app-icon"><img src="app.png" alt="Photos App Icon"/></span>
+                    <span class="app-title">App store</span>
+                </a>
+            </li>
+			
+			<li class="app">
+                <a href="#mail">
+                    <span class="app-icon"><img src="siri.jpg" alt="Mail App Icon"/></span>
+                    <span class="app-title">Siri <small>(unfinished)</small></span>
+                </a>
+            </li>
+			
+
+            <li class="app">
+                <a href="#system-preferences">
+                    <span class="app-icon"><img src="system.jpg" alt="Preferences App Icon"/></span>
+                    <span class="app-title">Preferences <small>(unfinished)</small></span>
+                </a>
+            </li>
+            <!--<li class="assets">-->
+            <!--<a href="#nolink">-->
+            <!--<span class="assets-icon"><img src="https://dl.dropboxusercontent.com/content_link/xjOb0Af8bLPGcjeN8zRRingaWSpqMHTQd0Zaj8LMzoOR3GEOXtkEi3pxuHa8v284/file" alt="Activity Monitor App Icon" /></span>-->
+            <!--<span class="assets-title">Activity Monitor</span>-->
+            <!--</a>-->
+            <!--</li>-->
+
+
+            <!--<li class="assets">-->
+            <!--<a href="#nolink">-->
+            <!--<span class="assets-icon"><img src="https://dl.dropboxusercontent.com/content_link/30CXyTIXCFkYbMjRmA0zNIartN5fqLnK0I5j8bAcxZSyRatvwMUchYWw0cwvs4gf/file" alt="GitHub App Icon" /></span>-->
+            <!--<span class="assets-title">GitHub</span>-->
+            <!--</a>-->
+            <!--</li>-->
+            <li class="app">
+                <a href="#terminal">
+                    <span class="app-icon"><img src="terminal.png" alt="Terminal App Icon"/></span>
+                    <span class="app-title">Terminal <small>(unfinished)</small></span>
+                </a>
+            </li>
+ 
+            <!--<li class="app">-->
+                <!--<a href="#itunes">-->
+                    <!--<span class="app-icon"><img src="https://dl.dropboxusercontent.com/content_link/CtRvoQ63bcHEGLmLqVhKYM9lH2lxvagx8qeOzLLD22Dihr2AGxjGPzPzM4KEqQPG/file" alt="iTunes App Icon"/></span>-->
+                    <!--<span class="app-title">iTunes</span>-->
+                <!--</a>-->
+            <!--</li>-->
+            <li class="app">
+                <a href="#textedit">
+                    <span class="app-icon"><img src="pages.png" alt="TextEdit App Icon"/></span>
+                    <span class="app-title">TextEdit <small>(unfinished)</small></span>
+                </a>
+            </li>
+<!--             <li class="app">
+                <a href="#twitter">
+                    <span class="app-icon"><img src="https://dl.dropboxusercontent.com/content_link/0bLt3GPAdnkHZPBnWLwecRYnU2y1Pqjw1tcdTIniQ7IgPf2wRZOkLaKQu7DjlacJ/file" alt="Twitter App Icon"/></span>
+                    <span class="app-title">Twitter</span>
+                </a>
+            </li> -->
+
+            <li class="dock-resizer ui-state-disabled"></li>
+            <li class="app ui-state-disabled">
+                <a href="#trash">
+                    <span class="app-icon"><img src="trash.png" alt="Trash App Icon"/></span>
+                    <span class="app-title">Trash <small>(unfinished)</small></span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <ul class="context-menu dropdown">
+        <li><a href="#nolink">New Folder</a></li>
+        <li class="separator"></li>
+        <li><a href="#nolink">Get Info</a></li>
+        <li class="separator"></li>
+        <li><a href="#nolink">Change Desktop Background...</a></li>
+        <li><a href="#nolink">Clean Up</a></li>
+        <li class="has-sub">
+            <a href="#nolink">Clean Up By</a>
+            <ul class="dropdown child-nav">
+                <li><a href="#nolink">Name</a></li>
+                <li><a href="#nolink">Kind</a></li>
+                <li><a href="#nolink">Date Modified</a></li>
+                <li><a href="#nolink">Date Created</a></li>
+                <li><a href="#nolink">Size</a></li>
+                <li><a href="#nolink">Tags</a></li>
+            </ul>
+        </li>
+
+        <li class="has-sub">
+            <a href="#nolink">Sort By</a>
+            <ul class="dropdown child-nav">
+                <li><a href="#nolink">None</a></li>
+                <li class="separator"></li>
+                <li><a href="#nolink">Snap To Grid</a></li>
+                <li class="separator"></li>
+                <li><a href="#nolink">Name</a></li>
+                <li><a href="#nolink">Kind</a></li>
+                <li><a href="#nolink">Date Last Opened</a></li>
+                <li><a href="#nolink">Date Added</a></li>
+                <li><a href="#nolink">Date Modified</a></li>
+                <li><a href="#nolink">Date Created</a></li>
+                <li><a href="#nolink">Size</a></li>
+                <li><a href="#nolink">Tags</a></li>
+            </ul>
+        </li>
+        <li><a href="#nolink">Show View Options</a></li>
+    </ul>
+</main>
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-157cd5b220a5c80d4ff8e0e70ac069bffd87a61252088146915e8726e5d9f147.js"></script>
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js'></script>
+      <script id="rendered-js" >
+////////////////////////////////////
+//  A thing by Vlad Shapochnikov  //
+//        www.vladshap.com        //
+////////////////////////////////////
+
+var $body = $('body');
+var $window = $('.window');
+var menuBar = function () {
+  var $menu = $('.menu');
+
+  // Menu Bar Logic
+  $menu.on('click', function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+    $(this).toggleClass('active-nav');
+  });
+};
+menuBar();
+
+var activeWindow = function () {
+  // Active Window Logic
+  $window.on('click', function (e) {
+    e.stopPropagation();
+    $window.removeClass('current-window');
+    $(this).addClass('current-window');
+  });
+
+};
+activeWindow();
+
+var draggableWindow = function () {
+  $window.draggable({
+    handle: '.window-actions, .window-nav, .status-bar',
+    containment: 'parent',
+    disabled: false,
+    start: function (event, ui) {
+      $window.removeClass('current-window');
+      $(this).addClass('current-window');
+    } });
+
+};
+draggableWindow();
+
+var resizableWindow = function () {
+  $window.resizable({
+    handles: 'all',
+    disabled: false,
+    minWidth: 320,
+    minHeight: 225,
+    start: function (event, ui) {
+      draggableWindow();
+    } });
+
+};
+resizableWindow();
+
+var closeWindow = function () {
+  $('.window-close').bind('click', function (e) {
+    e.preventDefault();
+    $(this).parents('.window').removeClass('current-window window-opened').addClass('window-closed').hide();
+  });
+};
+closeWindow();
+
+var zoomWindow = function () {
+  $('.window-zoom').on('click', function () {
+    //$(this).parents('.window').addClass('animated').toggleClass('window-zoomed');
+
+    if ($window.hasClass('window-zoomed')) {
+      $(this).parents('.window').removeClass('window-zoomed').css({
+        width: '',
+        height: '',
+        left: Math.floor(Math.random() * 100) + 1,
+        top: Math.floor(Math.random() * 100) + 1 });
+
+
+
+      setTimeout(function () {
+        $('.window').removeClass('animated');
+      }, 400);
+
+      draggableWindow();
+
+    } else {
+      $(this).parents('.window').addClass('animated window-zoomed').css({
+        left: 0,
+        top: 0,
+        right: 0,
+        width: $('.screen').width(),
+        height: $('.screen').height() - 50 });
+
+
+      $window.draggable({
+        disabled: true });
+
+    }
+  });
+};
+zoomWindow();
+
+var resizableWindowSidebar = function () {
+  $('.window-sidebar').resizable({
+    handles: 'e' });
+
+};
+resizableWindowSidebar();
+
+var sortableSidebar = function () {
+  var $sidebarUL = $('.sidebar-nav ul');
+
+  // Make sidebar rearrangeable
+  $sidebarUL.sortable({
+    distance: 10,
+    axis: 'y',
+    revert: 150 });
+
+  $sidebarUL.disableSelection();
+};
+sortableSidebar();
+
+var sidebarToggle = function () {
+  // Show/hide sidebar nav items
+  $('.toggle-nav').on('click', function () {
+    $(this).parent().next('.child-nav').slideToggle(200);
+  });
+};
+sidebarToggle();
+
+var windowTitle = function () {
+  //console.log($imageSrc);
+  var $selectedTitle = $(this).text();
+  var $imageSrc = $(this).find('img').attr('src');
+  $(this).parents('.window').find('.window-title .title').text($selectedTitle);
+  $(this).parents('.window').find('.title-icon').prop('src', $imageSrc);
+};
+windowTitle();
+
+var selectableSidebarNav = function () {
+  $window.each(function () {
+    $('.child-nav li', '.sidebar-nav').on("click", function () {
+      $('.child-nav li', '.sidebar-nav').removeClass('active');
+      $(this).addClass('active');
+
+      windowTitle();
+
+    });
+  });
+};
+selectableSidebarNav();
+
+var clearWindowClasses = function () {
+  $body.click(function () {
+    $window.removeClass('current-window');
+  });
+};
+clearWindowClasses();
+
+var sortableTabs = function () {
+  var $nativeTabs = $('.native-tabs ul');
+
+  // Tab Sorting
+  $nativeTabs.sortable({
+    cancel: '.ui-state-disabled',
+    axis: "x",
+    revert: 100,
+
+    containment: "parent" });
+
+  $nativeTabs.disableSelection();
+};
+sortableTabs();
+
+var switchTabs = function () {
+
+  var $tabs = $('a', '.native-tabs'),
+  $tab = $('.tab');
+
+  // Menu Bar Logic
+  $tabs.on('click', function (e) {
+    e.preventDefault();
+    $tab.not(this).removeClass('tab-active');
+    $(this).parent().addClass('tab-active');
+  });
+};
+switchTabs();
+
+var tabCount = null;
+var countWindowTabs = function () {
+
+  var windowName = null;
+
+  $window.each(function (e) {
+    tabCount = $(this).find('.tab').size();
+    windowName = $(this).attr("id");
+
+    //console.log(windowName + " window tab count: " + tabCount);
+  });
+
+  $window.on('click', function (e) {
+    e.stopPropagation();
+    $('.window').removeClass('current-window');
+    $(this).addClass('current-window');
+
+    tabCount = $(this).find('.tab').size();
+
+    //console.log("Current window tab count: " + tabCount);
+
+  });
+
+};
+countWindowTabs();
+
+var closeTab = function () {
+  $('.close-tab').on('click', function (e) {
+    e.preventDefault();
+    tabCount--;
+    console.log("New tab count: " + tabCount);
+
+    var $currentWindow = $(this).parents('.window');
+    //console.log($currentWindow);
+
+    if (tabCount < 1) {
+      $currentWindow.addClass('hide-tabs');
+    } else {
+      $currentWindow.removeClass('hide-tabs');
+    }
+
+    $(this).parents('.tab').addClass('removing').delay(200).queue(function () {
+      $(this).remove();
+    });
+
+  });
+};
+closeTab();
+
+var setDateAndTime = function () {
+  // Set system date
+  var currentDate = new Date();
+  var hours = currentDate.getHours();
+  var amPM = hours >= 12 ? 'PM' : 'AM';
+  hours = hours % 12;
+  hours = hours ? hours : 12; // the hour '0' should be '12'
+
+  var weekday = new Array(7);
+  weekday[0] = 'Sun';
+  weekday[1] = 'Mon';
+  weekday[2] = 'Tue';
+  weekday[3] = 'Wed';
+  weekday[4] = 'Thu';
+  weekday[5] = 'Fri';
+  weekday[6] = 'Sat';
+
+  var weekdayFull = new Array(7);
+  weekdayFull[0] = 'Sunday';
+  weekdayFull[1] = 'Monday';
+  weekdayFull[2] = 'Tuesday';
+  weekdayFull[3] = 'Wednesday';
+  weekdayFull[4] = 'Thursday';
+  weekdayFull[5] = 'Friday';
+  weekdayFull[6] = 'Saturday';
+
+  var month = new Array();
+  month[0] = 'January';
+  month[1] = 'February';
+  month[2] = 'March';
+  month[3] = 'April';
+  month[4] = 'May';
+  month[5] = 'June';
+  month[6] = 'July';
+  month[7] = 'August';
+  month[8] = 'September';
+  month[9] = 'October';
+  month[10] = 'November';
+  month[11] = 'December';
+
+  // Add a leading zero
+  function addZero(i) {
+    if (i < 10) {
+      i = '0' + i;
+    }
+    return i;
+  }
+
+  var dateTime = weekday[currentDate.getDay()] + ' ' + hours + ':' + addZero(currentDate.getMinutes() + ' ' + amPM);
+
+  var fullDate = weekdayFull[currentDate.getDay()] + ', ' + month[currentDate.getMonth()] + ' ' + currentDate.getDate() + ', ' + currentDate.getFullYear();
+
+  // Set time in Menu Bar
+  $('.date-time').text(dateTime);
+
+  // Set date in Time dropdown
+  $('.full-date').text(fullDate);
+};
+setDateAndTime();
+
+var $appIcon = $('.app-icon');
+
+var sortableDock = function () {
+  var $dockUL = $('.dock ul');
+
+  // Dock Sorting
+  $dockUL.sortable({
+    cancel: '.ui-state-disabled',
+    revert: 100 });
+
+  $dockUL.disableSelection();
+};
+sortableDock();
+
+var resizableDock = function () {
+  // Dock Resizing
+  $('.dock-resizer').resizable({
+    handles: 'n',
+    maxHeight: 120,
+    minHeight: 20,
+    resize: function (event, ui) {
+      $appIcon.css({
+        width: ui.size.height,
+        height: ui.size.height });
+
+      $('.dock').css('height', ui.size.height + 10);
+    } });
+
+
+};
+resizableDock();
+
+var whichAppsAreRunning = function () {
+  function runningApp() {
+    $('a', '.dock').each(function () {
+      var $linkName = $(this).attr('href');
+
+      if ($($linkName).is(':visible')) {
+        $(this).parent().addClass('running');
+        //console.log($linkName + " is running")
+      } else {
+        $(this).parent().removeClass('running');
+        //console.log($linkName + " is not running")
+      }
+    });
+  }
+
+  runningApp();
+
+  $('a', '.dock').on('click', function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    var $appLink = $(this).attr('href');
+    $('.window').removeClass('current-window');
+    $($appLink).show();
+
+    setTimeout(function () {
+      $($appLink).removeClass('window-closed').addClass('current-window window-opened');
+      runningApp();
+    });
+  });
+};
+whichAppsAreRunning();
+
+var rightClickMenu = function () {
+  var $screen = $('.screen');
+
+  // Trigger action when the contexmenu is about to be shown
+  $screen.bind('contextmenu', function (e) {
+
+    // Avoid the real one
+    e.preventDefault();
+
+    // Show contextmenu
+    $('.context-menu').finish().toggle().
+
+    // In the right position (the mouse)
+    css({
+      top: e.pageY - 32 + 'px',
+      left: e.pageX + 1 + 'px' });
+
+
+    //console.log(e.pageY + ', ' + e.pageX);
+  });
+
+  // If the document is clicked somewhere
+  $screen.bind('mousedown', function (e) {
+
+    // If the clicked element is not the menu
+    if (!$(e.target).parents('.context-menu').length > 0) {
+
+      // Hide it
+      $('.context-menu').hide();
+    }
+  });
+
+  // If the menu element is clicked
+  $('li', '.context-menu').on('on', function () {
+
+    // This is the triggered action name
+    switch ($(this).attr('data-action')) {
+
+      // A case for each action. Your actions here
+      case 'first':
+        alert('first');
+        break;
+      case 'second':
+        alert('second');
+        break;
+      case 'third':
+        alert('third');
+        break;}
+
+
+    // Hide it AFTER the action was triggered
+    $('.context-menu').hide();
+  });
+};
+rightClickMenu();
+
+var windowThumbSize = function () {
+
+  $(".thumb-size-slider").slider({
+    range: "min",
+    min: -10,
+    max: -4,
+    value: -6,
+    slide: function (event, ui) {
+      $(".album-photos").removeClass(function (index, className) {
+        return (className.match(/(^|\s)grid-\S+/g) || []).join(' ');
+      }).addClass("grid" + ui.value);
+    } });
+
+
+  $(".album-photos").addClass("grid" + $(".thumb-size-slider").slider("value"));
+};
+windowThumbSize();
+
+var baseUrl = "https://api.flickr.com/services/rest/?method=";
+var apiKey = "8563c61491f61f1cf1055ac503a9b86f";
+var userID = "14843363@N03";
+//var defaultPhotoset = "72157645611652682";
+var src;
+
+var getPhotoAlbums = function () {
+  var getListUrl = baseUrl + "flickr.photosets.getList" + "&user_id=" + userID + "&api_key=" + apiKey + "&format=json&jsoncallback=?";
+  //console.log(getListUrl);
+
+  // Get Album Names
+  $.getJSON(getListUrl, function (data) {
+    $.each(data.photosets.photoset, function (i, item) {
+
+      var albumThumbSrc = "http://farm" + item.farm + ".static.flickr.com/" + item.server + "/" + item.primary + "_" + item.secret + "_s.jpg";
+      $("<li>" +
+      "<a href='#album-" + item.id + "'>" +
+      "<i class='icon-sidebar icon-album'><img src='" + albumThumbSrc + "' alt='Album thumbnail for " + item.title._content + "'/></i>" +
+      item.title._content + "" +
+      "</a>" +
+      "</li>").
+      appendTo('.photo-albums');
+
+    });
+
+  }).
+  done(function () {
+
+    var $activeAlbum = $('.active a', '.photo-albums');
+    var $selectedTitle = $activeAlbum.text();
+    $('.album-title').text($selectedTitle);
+
+    var selectedAlbumID = $activeAlbum.attr("href").replace('#album-', '');
+    //console.log(photoID);
+
+    var displaySelectedAlbum = function () {
+      if (selectedAlbumID === "all") {
+        getAllPhotos();
+      } else {
+        getPhotos(selectedAlbumID);
+      }
+    };
+    displaySelectedAlbum();
+
+    $("a", ".photo-albums").on("click", function (e) {
+      e.preventDefault();
+      selectedAlbumID = $(this).attr("href").replace('#album-', '');
+      //console.log(photoID);
+
+      displaySelectedAlbum();
+      $selectedTitle = $(this).text();
+      $(this).parents('.window').find('.album-title').text($selectedTitle);
+
+    });
+
+    selectableSidebarNav();
+
+  });
+};
+getPhotoAlbums();
+
+// Get Photos from Albums
+var getPhotos = function (photosetid) {
+  var getPhotosUrl = baseUrl + "flickr.photosets.getPhotos" + "&photoset_id=" + photosetid + "&user_id=" + userID + "&api_key=" + apiKey + "&format=json&jsoncallback=?";
+  //console.log(getPhotosUrl);
+  $(".album-photos").empty();
+
+  $.getJSON(getPhotosUrl, function (data) {
+    $.each(data.photoset.photo, function (i, item) {
+      src = "http://farm" + item.farm + ".static.flickr.com/" + item.server + "/" + item.id + "_" + item.secret + "_n.jpg";
+      $("<li class='photo'><div class='photo-wrapper'><span class='image'><img src='" + src + "' alt=''/></span></div></li>").appendTo('.album-photos');
+    });
+    $(".photo-count").text(data.photoset.total + " Photos");
+
+  }).done(function () {
+    selectedPhoto();
+  });
+};
+//getPhotos();
+
+// Get All Photos
+var getAllPhotos = function () {
+  var getPhotosUrl = baseUrl + "flickr.people.getPublicPhotos" + "&user_id=" + userID + "&api_key=" + apiKey + "&per_page=500&format=json&jsoncallback=?";
+  //console.log(getPhotosUrl);
+  $(".album-photos").empty();
+
+  $.getJSON(getPhotosUrl, function (data) {
+    $.each(data.photos.photo, function (i, item) {
+      src = "http://farm" + item.farm + ".static.flickr.com/" + item.server + "/" + item.id + "_" + item.secret + "_n.jpg";
+      $("<li class='photo'><div class='photo-wrapper'><span class='image'><img src='" + src + "' alt=''/></span></div></li>").appendTo('.album-photos');
+    });
+    $(".photo-count").text(data.photos.total + " Photos");
+  }).done(function () {
+    selectedPhoto();
+  });
+};
+//getAllPhotos();
+
+//var $date = $('.photo', 'album-photos').not(':has(:empty)');
+//var o = {
+//    38: 'up',
+//    40: 'bottom',
+//    37: 'prev',
+//    39: 'next'
+//}
+//
+//
+//$(document).on('keyup', function (e) {
+//    var dir = o[e.which];
+//    var $active = $('.active'),
+//        i = $date.index($active);
+//    if (e.which == 13) {
+//        $('.selected').removeClass('selected');
+//        $active.addClass('selected');
+//        return;
+//    }
+//    if (!$active.length) {
+//        $date.first().addClass('active');
+//        return;
+//    } else {
+//        if (dir === 'next' || dir === 'prev') {
+//            $active.removeClass('active')[dir]().addClass('active');
+//        } else {
+//            var p = dir === 'up' ? (i - 7) : (i + 7);
+//            $date.removeClass('active').eq(p).addClass('active');
+//        }
+//    }
+//})
+
+var selectedPhoto = function () {
+  $('.photo').on('click', function (e) {
+
+    if (!$(this).hasClass('photo__selected')) {
+      $('.photo__selected').removeClass('photo__selected');
+      $(this).addClass('photo__selected');
+
+      zoomSelectedPhoto();
+    }
+
+  });
+};
+
+var zoomSelectedPhoto = function () {
+
+  $('.photo__selected').on('dblclick', function () {
+
+    if ($(this).hasClass('photo__zoomed')) {
+      $(this).removeClass('photo__zoomed');
+      $('.image-large').remove();
+
+    } else {
+
+      $("<img/>").on('load', function () {
+        console.log("image loaded correctly");
+
+      }).on('error', function () {
+        console.log("error loading image");
+
+      }).attr("src", $(originalImage).attr("src"));
+
+      $(this).addClass('photo__zoomed');
+
+      var selectedImgSrc = $(this).find('img').attr('src');
+      var largeImgSrc = selectedImgSrc.replace('_n.jpg', '_h.jpg');
+
+      //console.log(largeImgSrc);
+
+      $(this).find('.photo-wrapper').append("<span class='image-large'><img src='" + largeImgSrc + "' alt=''/></span>");
+    }
+
+  });
+
+};
+// zoomSelectedPhoto();
+selectedPhoto();
+//# sourceURL=pen.js
+    </script>
+
+  
+
+</body>
+
+</html>
+ 
